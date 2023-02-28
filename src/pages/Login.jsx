@@ -13,6 +13,7 @@ const Login = () => {
                             <Illustration />
                         </div>
                     </div>
+                    
                     <div className="col-md-5 h-100 position-relative">
                         <div className="position-absolute top-0 left-0 p-2">
                             <NavbarLogo />
