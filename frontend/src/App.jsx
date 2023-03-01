@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Layout from './components/Layout'
 
 function App() {
@@ -6,7 +5,6 @@ function App() {
   return (
     <div className="App">
       <Layout />
-      
     </div>
   )
 }
