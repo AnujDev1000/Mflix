@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavContextProvider } from '../context/NavContext'
 import { SearchContextProvider } from '../context/SearchContext'
+import { UserContextProvider } from '../context/userContext'
 import MainRoutes from '../routes/MainRoutes'
 import MovieRoutes from '../routes/MovieRoutes'
 import PersonRoutes from '../routes/PersonRoutes'
@@ -10,17 +11,19 @@ import Navbar from './navbar/Navbar'
 
 const Layout = () => {
     return (
-        <div className="layout">
-            <SearchContextProvider>
+        <div className="layout" id="layout">
+            <UserContextProvider>
                 <UserRoutes />
                 <NavContextProvider>
-                    <Navbar />
-                    <MainRoutes />
-                    <MovieRoutes />
-                    <TvRoutes />
-                    <PersonRoutes />
+                    <SearchContextProvider>
+                        <Navbar />
+                        <MainRoutes />
+                        <MovieRoutes />
+                        <TvRoutes />
+                        <PersonRoutes />
+                    </SearchContextProvider>
                 </NavContextProvider>   
-            </SearchContextProvider>
+            </UserContextProvider>
         </div>
     )
 }

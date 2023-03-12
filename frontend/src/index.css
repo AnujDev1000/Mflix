@@ -75,7 +75,7 @@ body{
 }
 .bg-prime-gradient-3
 {
-  background: linear-gradient(to right, #000, #000000c2, #0000001f);
+  background: linear-gradient(to bottom, #000000e3, #ffffff00, #00000000);
 }
 .bg-main
 {
@@ -344,6 +344,14 @@ body{
 {
   text-align: justify;
   text-justify: inter-word;
+}
+.text-shadow-1
+{
+  text-shadow: .2rem.2rem .1rem rgba(0,0,0,.4);
+}
+.bg-gradient-1
+{
+  background: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
 }
 
 

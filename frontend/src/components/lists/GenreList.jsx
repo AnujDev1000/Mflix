@@ -31,7 +31,7 @@ const GenreList = ({type}) => {
         <>
             {genreData.length ? 
                 <div className=" text-base2 container navbar-padding">
-                    <div className="search-header">
+                    <div className="genre-header">
                         {type == "tv" ? 
                             <span className="text-base2 text-uppercase fs-small">Tv Shows</span>
                             :

@@ -1,6 +1,7 @@
 import { useEffect, useContext  } from "react";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
+import { UserContext } from "../../context/userContext";
 import getSearchMovies from "../../hooks/getSearchMovies";
 import NavbarBtns from "./NavbarBtns";
 import NavbarLogo from "./NavbarLogo";
@@ -9,6 +10,7 @@ import NavbarSearch from "./NavbarSearch";
 import NavbarUser from "./NavbarUser";
 
 const Navbar = () => {
+    const { dispatch } = useContext(UserContext)
     const navigate = useNavigate()
     const { search, setSearch , setSearchData } = useContext(SearchContext)
 
@@ -26,6 +28,18 @@ const Navbar = () => {
             
     }
 
+    const checkUserBox = () => {
+        const elm = document.getElementById("user-box")
+        const elm2 = document.getElementById("user-box2")
+        if(!elm.classList.contains("d-none")){
+            elm.classList.add("d-none")
+        }
+        if(!elm2.classList.contains("d-none")){
+            elm2.classList.add("d-none")
+        }
+    }
+
+    
     useEffect(() => {
         setSearchData([])
         if(search.length > 2){
@@ -45,6 +59,7 @@ const Navbar = () => {
         }
 
         window.addEventListener("scroll", sticky)
+        checkUserBox()
     }, [search])
 
     const handleSearch = (e) => {
@@ -75,31 +90,44 @@ const Navbar = () => {
     }
 
 
-    const openUserBox = (e) => {
-        e.preventDefault()
-        const elm = document.getElementById("user-box")
+    const openUserBox2 = (e) => {
         const elm2 = document.getElementById("user-box2")
-        if(elm.classList.contains("d-none")){
-            elm.classList.remove("d-none")
+        if(elm2.classList.contains("d-none")){
             elm2.classList.remove("d-none")
         }
         else{
             setSearch("")
-            elm.classList.add("d-none")
             elm2.classList.add("d-none")
         }
     }
 
+    const openUserBox = (e) => {
+        const elm = document.getElementById("user-box")
+        if(elm.classList.contains("d-none")){
+            elm.classList.remove("d-none")
+        }
+        else{
+            setSearch("")
+            elm.classList.add("d-none")
+        }
+    }
+    
+    const logoutUser = (e) => {
+        e.preventDefault()
+        dispatch("REMOVE_USER", {})
+        navigate("/")
+    }
+    
     return (
         <>
             <nav className="container px-2 navbar navbar-light fixed-top rounded navbar-expand-md z-index" id="navbar">
                 <NavbarLogo />
-                <NavbarBtns openSearchBox={openSearchBox} openUserBox={openUserBox} />
+                <NavbarBtns openSearchBox={openSearchBox} openUserBox2={openUserBox2} logoutUser={logoutUser} />
                 
                 <div className="collapse navbar-collapse z-index-main position-relative" id="navdata">
                     <NavbarMenu />
                     <NavbarSearch view={"max"} setSearch={setSearch} handleSearch={handleSearch} search={search} />
-                    <NavbarUser openUserBox={openUserBox} />
+                    <NavbarUser openUserBox={openUserBox} logoutUser={logoutUser} />
                 </div>
                 <NavbarSearch view={"min"} setSearch={setSearch} handleSearch={handleSearch} search={search} />
             </nav>

@@ -1,10 +1,9 @@
 import React from 'react'
-import walle from "../../assets/wall-e.jpg"
 
 const WallE = () => {
     return (
         <div className="walle-box w-100">
-            <img src={walle} alt="" className="img-responsive object-position-top" />
+            <img src="https://image.tmdb.org/t/p/original/gWZTAnjLQlk0bg16zP5G5XG70Ys.jpg" alt="" className="img-responsive object-position-top" />
         </div>
     )    
 }

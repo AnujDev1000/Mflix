@@ -12,7 +12,7 @@ const Search = () => {
 
 
     useEffect(() => {
-        const searchElm = document.getElementById("search")
+        const searchElm = document.getElementById("layout")
         const searchMini = document.getElementById("search-mini")
         const searchMini2 = document.getElementById("search-mini2")
         if(searchElm){
