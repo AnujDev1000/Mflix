@@ -5,7 +5,7 @@ import Genres from '../Genres'
 import DetailsBtns from './DetailsBtns'
 import DetailsMoney from './DetailsMoney'
 
-const MovieDetailsContent = ({movie, type}) => {
+const MovieDetailsContent = ({movie, type, favorite}) => {
     const genres = movie.genres && movie.genres.map(genre => {return genre.id})
 
     return (
@@ -24,7 +24,7 @@ const MovieDetailsContent = ({movie, type}) => {
                 <Genres genresList={genres} type={type} />
             </div>
             <div className="d-md-none mb-2">
-                <DetailsBtns />
+                <DetailsBtns favorite={favorite} type={"movie"} />
             </div>
             <p className="discription text-white ">{movie.overview}</p>
             <div className="money d-flex flex-row">

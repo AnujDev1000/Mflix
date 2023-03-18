@@ -14,16 +14,20 @@ const MovieCard = ({movie}) => {
                 </Suspense> 
             </div>
             <div className="movie-content position-absolute w-100 h-100 top-0 start-0 p-1">
-                <span className="favorite position-absolute top-0 end-0 p-2 p-sm-3">
+                {/* <span className="favorite position-absolute top-0 end-0 p-2 p-sm-3">
                     <div className="favorit-icon p-1 px-2 bg-white rounded-circle shadow-sm">
                         <FaRegHeart className="text-heart fs-6" />
                     </div>
-                </span>
+                </span> */}
                 <div className="movie-content-data bg-prime-gradient-1 w-100 h-100 p-2 rounded d-flex flex-column justify-content-end">
                     <span className="movie-name text-base1 fs-small fw-bold">{movie.title}</span>
                     <span className="text-base2 fs-small">{movie.release_date && movie.release_date.split("-")[0]}</span>
                     <StarRating rating={movie.vote_average} />
-                    <Genres genresList={movie.genre_ids} type={"movie"} />
+                    {movie.genre_ids ? 
+                        <Genres genresList={movie.genre_ids} type={"movie"} />
+                        :
+                        null
+                    }
                 </div>
             </div>
         </div>

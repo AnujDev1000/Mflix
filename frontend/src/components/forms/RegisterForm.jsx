@@ -83,12 +83,12 @@ const RegisterForm = () => {
                             Already have an account? 
                             <Link to="/login" className="text-decoration-none fw-bold"> Log In</Link>
                         </span>
-                        <hr className="bg-secondary m-0 mt-3" />
-
+                        
+                        {/* <hr className="bg-secondary m-0 mt-3" />
                         <div className="mt-2 options d-flex flex-row justify-content-center align-items-center fs-2">
                             <FcGoogle className="p-1 border rounded-circle mx-2"/>
                             <FaFacebook className="p-1 border rounded-circle text-primary mx-2" />
-                        </div>
+                        </div> */}
                     </form>
                 </div>
             </div>

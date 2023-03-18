@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FaUserCircle } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
+import { FavoriteContext } from '../../context/FavoriteContext'
 import { UserContext } from '../../context/userContext'
+import getFavorites from '../../hooks/getFavorites'
 import loginUser from '../../hooks/loginUser'
 
 const LoginForm = () => {
     const { user, dispatch } = useContext(UserContext)
+    const { dispatchFavorites } = useContext(FavoriteContext)
     const navigate = useNavigate()
     const [inputs, setInputs] = useState({ email: "", password: ""})
     const [errors, setErrors] = useState({})
@@ -13,7 +16,7 @@ const LoginForm = () => {
 
     useEffect(() => {
     }, [inputs])
-
+    
     const handleLogin = (e) => {
         e.preventDefault()
         setErrors({})
@@ -23,6 +26,10 @@ const LoginForm = () => {
             if(res.data.hasOwnProperty('token')){
                 setInputs({ email: "", password: "" })
                 dispatch("SET_USER", res.data)
+                getFavorites(res.data.favorite, res.data.token)
+                .then(res2 => {
+                    dispatchFavorites("SET_FAVORITES", res2.data)
+                })
                 setLoading(false)
                 navigate("/")
             }

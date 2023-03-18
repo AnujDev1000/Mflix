@@ -36,7 +36,7 @@ const emptyLogin = (email, password, errors) => {
 
 const checkPassword = (password, errors) => {
     if(password.length < 8){
-        errors.password = "Password more than 8 characters!"
+        errors.password = "Password less than 8 characters!"
     }
     // errors = errors.concat(checkFormat(password))
     return errors

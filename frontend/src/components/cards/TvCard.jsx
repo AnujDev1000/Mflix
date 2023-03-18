@@ -14,16 +14,20 @@ const TvCard = ({show}) => {
                 </Suspense> 
             </div>
             <div className="show-content position-absolute w-100 h-100 top-0 start-0 p-1">
-                <span className="heart position-absolute top-0 end-0 p-3 p-sm-3">
+                {/* <span className="heart position-absolute top-0 end-0 p-3 p-sm-3">
                     <div className="favorit-icon p-1 px-2 bg-white rounded-circle shadow-sm">
                         <FaRegHeart className="text-heart fs-6" />
                     </div>
-                </span>
+                </span> */}
                 <div className="show-content-data bg-prime-gradient-1 w-100 h-100 p-2 rounded d-flex flex-column justify-content-end">
                     <span className="show-name text-base1 fs-small fw-bold">{show.name}</span>
                     <span className="text-base2 fs-small">{show.first_air_date && show.first_air_date.split("-")[0]}</span>
                     <StarRating rating={show.vote_average} />
-                    <Genres genresList={show.genre_ids} type={"tv"} />
+                    {show.genre_ids ?
+                        <Genres genresList={show.genre_ids} type={"tv"} />
+                        :
+                        null
+                    }
                 </div>
             </div>
         </div>

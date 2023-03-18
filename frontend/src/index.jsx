@@ -12,6 +12,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </BrowserRouter>
 )
 
-
-// Create your personalized movie and TV show collection with our 'My Watchlist' feature. Save your favorite titles for later and never miss a must-watch moment again!
-// git add . && git commit -m "COMMIT" && git push origin main

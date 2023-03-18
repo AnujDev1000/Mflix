@@ -3,7 +3,7 @@ import { FaUser } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../../context/userContext'
 
-const NavbarUser = ({openUserBox, logoutUser}) => {
+const NavbarUser = ({openUserBox, logoutUser, navigateTo}) => {
     const {user} = useContext(UserContext)
 
     return (
@@ -17,28 +17,28 @@ const NavbarUser = ({openUserBox, logoutUser}) => {
                         <FaUser />
                     </button>
             }
-            <div className="d-none user-box search-top-2 bg-dark rounded pb-0 px-2 mt-1 position-absolute end-0 z-index text-end"  id="user-box">
+            <div className="d-none user-box search-top-2 bg-dark rounded pb-0 py-1 px-2 mt-1 position-absolute end-0 z-index text-end"  id="user-box">
                 {user && user.token ? 
                         <>
-                            <Link to="/profile" className="text-decoration-none text-light fs-small">
+                            <p onClick={() => navigateTo("/profile")} className="m-0 cursor-pointer text-light fs-small">
                                 Profile
-                            </Link> 
+                            </p> 
                             <hr className="bg-secondary m-0" />
-                            <Link to="/favorites" className="text-decoration-none text-light fs-small">
+                            <p onClick={() => navigateTo("/favorites")} className="m-0 cursor-pointer text-light fs-small">
                                 Favorites
-                            </Link>
+                            </p>
                             <hr className="bg-secondary m-0" />
-                            <span className="text-light fs-small cursor-pointer" onClick={e => logoutUser(e)}>Logout</span>
+                            <p className="m-0 text-light fs-small cursor-pointer" onClick={() => logoutUser()}>Logout</p>
                         </>
                     :
                         <>
-                            <Link to="/register" className="text-decoration-none text-light fs-small">
+                            <p onClick={() => navigateTo("/register")} className="m-0 cursor-pointer text-light fs-small">
                                 Register
-                            </Link>
+                            </p>
                             <hr className="bg-secondary m-0" />
-                            <Link to="/login" className="text-decoration-none text-light fs-small">
+                            <p onClick={() => navigateTo("/login")} className="m-0 cursor-pointer text-light fs-small">
                                 Login
-                            </Link>
+                            </p>
                         </>
                 }
             </div>

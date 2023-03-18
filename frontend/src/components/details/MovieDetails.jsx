@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import getMovieDetails from '../../hooks/getMovieDetails'
 import DetailsBg from './DetailsBg';
 import Loader from '../Loader';
@@ -11,11 +11,21 @@ import DetailsReviews from './DetailsReviews';
 import DetailsVideo from './DetailsVideo';
 import MovieDetailsContent from './MovieDetailsContent';
 import DetailsSimilar from './DetailsSimilar';
+import { useContext } from 'react';
+import { FavoriteContext } from '../../context/FavoriteContext';
+import addFavoriteMovie from '../../hooks/addFavoriteMovie';
+import { UserContext } from '../../context/userContext';
+import { toast } from "react-toastify"
+import removeFavoriteMovie from '../../hooks/removeFavoriteMovie';
 
 const MovieDetails = () => {
+    const navigate = useNavigate()
+    const { favorites, dispatchFavorites } = useContext(FavoriteContext)
+    const { user } = useContext(UserContext)
     const { id } = useParams()
     const [movie, setMovie] = useState([])
     const [loading, setLoading] = useState(false)
+    const [favorite, setFavorite] = useState(false)
 
     useEffect(() => {
         setLoading(true)
@@ -23,9 +33,59 @@ const MovieDetails = () => {
                 .then(res => {
                     setLoading(false)
                     setMovie(res.data)
+                    if(favorites.movies.findIndex(m => m.id == res.data.id) != -1){
+                        setFavorite(true)
+                    }
                 })
 
+        if(!user){
+            setFavorite(false)
+        }
     }, [id])
+
+    const addToFavorite = (e) => {
+        e.preventDefault()
+        setLoading(true)
+        if(user && user.token){
+            const body = {
+                genres: movie.genres,
+                id: movie.id, 
+                original_title: movie.original_title,
+                poster_path: movie.poster_path,
+                release_date: movie.release_date,
+                title: movie.title,
+                vote_average: movie.vote_average
+            }
+            addFavoriteMovie(favorites._id, user.token, body)
+            .then(res => {
+                setLoading(false)
+                toast.success("Added to Favorites")
+                dispatchFavorites("ADD_MOVIE", body)
+                setFavorite(true)
+            })
+        }
+        else{
+            setLoading(false)
+            navigate("/login")
+        }
+    }
+    
+    const removeFromFavorite = (e) => {
+        e.preventDefault()
+        setLoading(true)
+        const body = {
+            id: movie.id
+        }
+        removeFavoriteMovie(favorites._id, user.token, body)
+        .then(res => {
+            setLoading(false)
+            toast.success("Removed from Favorites")
+            dispatchFavorites("REMOVE_MOVIE", body)
+            setFavorite(false)
+        })
+    }
+
+
 
     return (
         <>
@@ -38,14 +98,14 @@ const MovieDetails = () => {
                             <div className="movie-details-main">
                                 <DetailsPoster poster_path={movie.poster_path} />
                                 <div className="d-none d-md-block">
-                                    <DetailsBtns />
+                                    <DetailsBtns favorite={favorite} type={"movie"} addToFavorite={addToFavorite} removeFromFavorite={removeFromFavorite} loading={loading} />
                                 </div>
                             </div>
                             <hr className="bg-white d-md-none" />
                         </div>
                         
                         <div className="Content col-* col-md-9 mb-2">
-                            <MovieDetailsContent movie={movie} type={"movie"} />
+                            <MovieDetailsContent movie={movie} type={"movie"} favorite={favorite} addToFavorite={addToFavorite} removeFromFavorite={removeFromFavorite} loading={loading} />
                             {movie.credits.cast && movie.credits.cast.length ? 
                                 <DetailsCast cast={movie.credits.cast.slice(0,5)} id={movie.id} type={"movie"} /> 
                                 : null

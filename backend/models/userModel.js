@@ -95,7 +95,7 @@ userSchema.statics.login = async function(email, password){
             }
             else{
                 const token = generateToken(user._id)
-                return { isAdmin: user.isAdmin , firstname: user.firstname, id: user._id, token: token}
+                return { isAdmin: user.isAdmin , firstname: user.firstname, id: user._id, favorite: user.favorite, token: token}
             }
         } catch (error) {
             return error.meassage

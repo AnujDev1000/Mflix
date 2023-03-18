@@ -1,4 +1,5 @@
 import React from 'react'
+import { FavoriteContextProvider } from '../context/FavoriteContext'
 import { NavContextProvider } from '../context/NavContext'
 import { SearchContextProvider } from '../context/SearchContext'
 import { UserContextProvider } from '../context/userContext'
@@ -13,16 +14,18 @@ const Layout = () => {
     return (
         <div className="layout" id="layout">
             <UserContextProvider>
-                <UserRoutes />
-                <NavContextProvider>
-                    <SearchContextProvider>
-                        <Navbar />
-                        <MainRoutes />
-                        <MovieRoutes />
-                        <TvRoutes />
-                        <PersonRoutes />
-                    </SearchContextProvider>
-                </NavContextProvider>   
+                <FavoriteContextProvider>
+                    <UserRoutes />
+                    <NavContextProvider>
+                            <SearchContextProvider>
+                                <Navbar />
+                                <MainRoutes />
+                                <MovieRoutes />
+                                <TvRoutes />
+                                <PersonRoutes />
+                            </SearchContextProvider>
+                    </NavContextProvider>   
+                </FavoriteContextProvider>
             </UserContextProvider>
         </div>
     )
