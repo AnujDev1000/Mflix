@@ -21,6 +21,5 @@
   <h2>Search Page<h2/>
   <img src="/UI/searchMovie.jpg" width="350" alt="image">
   <br/>
-  <h3>More Images</h3>
-  <a href="/UI"></a>
+  [MORE Images](https://github.com/AnujDev1000/Mflix/tree/main/UI)
 </p>
