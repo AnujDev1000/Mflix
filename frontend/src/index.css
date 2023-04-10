@@ -353,8 +353,19 @@ body{
 {
   background: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
 }
-
-
+.hover-primary:hover
+{
+  background-color: #0d6efd;
+  color: #fff;
+}
+.overflows-auto
+{
+  overflow: auto;
+}
+.top-100
+{
+  top: 100%;
+}
 
 
 

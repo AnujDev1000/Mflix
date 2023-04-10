@@ -32,3 +32,4 @@ mongoose.connect(process.env.DBURL)
         console.log(err);
     })
 
+// git add . && git commit -m "COMMIT" && git push origin main

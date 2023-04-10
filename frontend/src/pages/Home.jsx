@@ -25,13 +25,13 @@ const Home = () => {
 
     return (
         <>
-            {providers.length ? 
                 <div className="Home position-relative">
                     <HomeMain />
                     {/* <HomeProviders providers={providers.slice(0,48)} /> */}
                 </div>
+            {/* {providers.length ? 
                 : <div className="position-relative "><Loader /></div>
-            }
+            } */}
         </>
     )
 }

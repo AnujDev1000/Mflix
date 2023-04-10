@@ -28,6 +28,7 @@ const TvDetails = () => {
 
     useEffect(() => {
         setLoading(true)
+        setFavorite(false)
         getTvDetails(id, "all")
                 .then(res => {
                     setLoading(false)

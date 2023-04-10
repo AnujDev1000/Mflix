@@ -28,6 +28,7 @@ const MovieDetails = () => {
     const [favorite, setFavorite] = useState(false)
 
     useEffect(() => {
+        setFavorite(false)
         setLoading(true)
         getMovieDetails(id, "all")
                 .then(res => {
